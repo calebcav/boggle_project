@@ -4,6 +4,7 @@ import Randomboard, { RandomGrid } from './BoilerPlate.js';
 import TextField from '@material-ui/core/TextField';
 import findAllSolutions from './boggle_solver.js';
 import dictionary from './full-wordlist.js';
+import LoginButton from './LoginButton.js';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
   const [board, setBoard] = useState(RandomGrid());
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("Welcome to Boggle");
-
+  const [user, setUser] = useState(null);
  
 
   function showButton() {
@@ -48,7 +49,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="https://process.filestackapi.com/cache=expiry:max/Z0nJduh9TuaBX3IQmbky"></img>
+        <img class="center" src="https://process.filestackapi.com/cache=expiry:max/Z0nJduh9TuaBX3IQmbky"></img>
+        <LoginButton setUser = {(user) => setUser(user)} />
+        {user != null &&
         <body>
         {showBoard &&
         <div id="board">
@@ -140,9 +143,9 @@ function App() {
         </div>
         }     
 
-        <button class = "button" onClick={() => setShowBoard(!showBoard)}> {showButton()} </button>
-        <button class = "random" onClick={() => setBoard(Randomboard())}>Randomize Board!</button>
-        <p>
+        <button class = "button center"onClick={() => setShowBoard(!showBoard)}> {showButton()} </button>
+        <button class = "random center" onClick={() => setBoard(Randomboard())}>Randomize Board!</button>
+        <p class="center">
             {message}
         </p>
         { validWords.length > 0 &&
@@ -151,15 +154,22 @@ function App() {
         <ul>
             {validWords.map((word) => {
                 return (
-                <li class="ol" key={word}>{word}</li>
+                <li key={word}>{word}</li>
                 );
             })}
         </ul>
-        <p>
+        <p class="center">
         <TextField onKeyPress={(e) => keyPress(e)} onChange={(event) => setInput(event.target.value)}/>
         </p>
-        </body>
+
       
+        <script src="/__/firebase/7.8.0/firebase-app.js"></script>
+
+        <script src="/__/firebase/7.8.0/firebase-analytics.js"></script>
+
+        <script src="/__/firebase/init.js"></script>
+        </body>
+}
       </header>
     </div>
   );

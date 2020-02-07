@@ -12,6 +12,7 @@ body {
 
 .logo {
   align-self: center;
+  margin: auto;
 }
 
 #board {
@@ -20,6 +21,8 @@ body {
   padding: 5px;
   margin-top: 40px;
   width: 410px;
+  margin: auto;
+
 }
 
 .row {
@@ -30,9 +33,6 @@ body {
   width: 400px;
 }
 
-.boggle:hover {
-  cursor: pointer;
-}
 
 .boggle {
  width: 50px;
@@ -88,4 +88,8 @@ body {
 }
 
 
-
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
