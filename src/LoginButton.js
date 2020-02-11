@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from 'firebase';
 
-
 function LoginButton({setUser}) {
     function login() {
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -14,7 +13,7 @@ function LoginButton({setUser}) {
     }
 
     return (
-        <button onClick={() => login()}>
+        <button class="button center" onClick={() => login()}>
             Login
         </button>
     );

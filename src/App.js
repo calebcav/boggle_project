@@ -5,6 +5,10 @@ import TextField from '@material-ui/core/TextField';
 import findAllSolutions from './boggle_solver.js';
 import dictionary from './full-wordlist.js';
 import LoginButton from './LoginButton.js';
+import TextInput from './TextInput.js';
+import GetGrid from './GrabGrid.js';
+import convertStringToGrid from './StringGrid.js';
+import LeaderBoards from './ShowScores.js';
 
 
 function App() {
@@ -16,7 +20,12 @@ function App() {
   const [input, setInput] = useState("");
   const [message, setMessage] = useState("Welcome to Boggle");
   const [user, setUser] = useState(null);
+  const [challenges, loadChallenges] = useState(false);
+  const [score, setScore] = useState(0);
  
+const grids = GetGrid();
+  
+
 
   function showButton() {
       if (showBoard) {
@@ -50,7 +59,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img class="center" src="https://process.filestackapi.com/cache=expiry:max/Z0nJduh9TuaBX3IQmbky"></img>
-        <LoginButton setUser = {(user) => setUser(user)} />
+        <LoginButton setUser = {(user) => setUser(user)}/>
         {user != null &&
         <body>
         {showBoard &&
@@ -144,7 +153,7 @@ function App() {
         }     
 
         <button class = "button center"onClick={() => setShowBoard(!showBoard)}> {showButton()} </button>
-        <button class = "random center" onClick={() => setBoard(Randomboard())}>Randomize Board!</button>
+        <button class = "random center" onClick={() => setBoard(Randomboard())}>randomize board!</button>
         <p class="center">
             {message}
         </p>
@@ -152,6 +161,7 @@ function App() {
             <p>Correct Answers: </p>
         }
         <ul>
+
             {validWords.map((word) => {
                 return (
                 <li key={word}>{word}</li>
@@ -160,9 +170,33 @@ function App() {
         </ul>
         <p class="center">
         <TextField onKeyPress={(e) => keyPress(e)} onChange={(event) => setInput(event.target.value)}/>
+        <TextInput promptText="username" field="name" user={user}/>
+        <LeaderBoards />
+        <button onClick={() => loadChallenges(true) }> Load Challenges</button>
+        </p>
+        <p>
+            { challenges &&
+            <div>
+                 <button class="button" onClick={() => setBoard(convertStringToGrid(grids[0]))}>
+                Grid 1
+            </button>
+            <button class="button" onClick={() => setBoard(convertStringToGrid(grids[1]))}>
+            Grid 2
+            </button>
+            <button class="button" onClick={() => setBoard(convertStringToGrid(grids[2]))}>
+            Grid 3
+            </button>
+            <button class="button" onClick={() => setBoard(convertStringToGrid(grids[3]))}>
+            Grid 4
+            </button>
+            <button class="button" onClick={() => setBoard(convertStringToGrid(grids[4]))}>
+            Grid 5
+            </button>
+            </div>
+            }
         </p>
 
-      
+        
         <script src="/__/firebase/7.8.0/firebase-app.js"></script>
 
         <script src="/__/firebase/7.8.0/firebase-analytics.js"></script>
